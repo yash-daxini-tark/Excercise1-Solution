@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 
 namespace Practice
@@ -110,13 +111,13 @@ namespace Practice
 
     class MovingAvg
     {
-        public double difference(int k,double[] data)
+        public double difference(int k, double[] data)
         {
             List<double> list = new List<double>();
-            for (int i = 0;i <= data.Length-k;i++)
+            for (int i = 0; i <= data.Length - k; i++)
             {
                 double curSum = 0;
-                for(int j = i; j < i + k; j++)
+                for (int j = i; j < i + k; j++)
                 {
                     curSum += data[j];
                 }
@@ -226,7 +227,7 @@ namespace Practice
 
     class LargestSubsequence
     {
-        public void doRecursion(string s,int i,HashSet<string> set,StringBuilder cur)
+        public void doRecursion(string s, int i, HashSet<string> set, StringBuilder cur)
         {
             if (i == s.Length)
             {
@@ -234,17 +235,33 @@ namespace Practice
                 return;
             }
             cur.Append(s[i]);
-            doRecursion(s, i+1, set, cur);
-            cur.Remove(cur.Length-1,1);
+            doRecursion(s, i + 1, set, cur);
+            cur.Remove(cur.Length - 1, 1);
             doRecursion(s, i + 1, set, cur);
         }
         public string getLargest(String s)
         {
-            HashSet<string> set = new HashSet<string>();   
-            doRecursion(s, 0,set,new StringBuilder(""));
+            List<int> inds = new List<int>();
+            char max = s[0];
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (s[i] > max)
+                {
+                    max = s[i];
+                }
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == max) inds.Add(i);
+            }
+            HashSet<string> set = new HashSet<string>();
+            foreach (int i in inds)
+            {
+                doRecursion(s, i, set, new StringBuilder(""));
+            }
             List<string> list = new List<string>(set);
             list.Sort();
-            return list[list.Count-1];
+            return list[list.Count - 1];
         }
     }
 
@@ -269,13 +286,55 @@ namespace Practice
 
     #endregion
 
-    #region DukeOnChessBoard
+    #region 9. DukeOnChessBoard
 
     class DukeOnChessBoard
     {
-        public String dukePath(int n, String initPosition)
+        static StringBuilder ans;
+        public void doRecursion(int i, int j, int n, HashSet<string> set, Dictionary<int, char> map, bool[,] visited, string cur)
         {
-            return "";
+            if (i < 1 || i > n || j < 1 || j > n || visited[i, j])
+            {
+                set.Add(cur.ToString());
+                cur = new string("");
+                return;
+            }
+            visited[i, j] = true;
+            cur += map[i] + "" + j + '-';
+            doRecursion(i + 1, j, n, set, map, visited, cur);
+            doRecursion(i, j + 1, n, set, map, visited, cur);
+            doRecursion(i, j - 1, n, set, map, visited, cur);
+            doRecursion(i - 1, j, n, set, map, visited, cur);
+        }
+        public string dukePath(int n, string initPosition)
+        {
+            int initX = (int)initPosition[0];
+            initX -= 96;
+            int initY = initPosition[1] - '0';
+            Dictionary<int, char> map = new Dictionary<int, char>();
+            for (int i = 1; i <= n; i++)
+            {
+                map.Add(i, (char)(i + 96));
+            }
+            ans = new StringBuilder();
+            bool[,] visited = new bool[n + 1, n + 1];
+            for (int i = 0; i <= n; i++)
+            {
+                visited[0, i] = true;
+                visited[i, 0] = true;
+            }
+
+            HashSet<string> set = new HashSet<string>();
+
+            doRecursion(initX, initY, n, set, map, visited, new string(""));
+
+            List<string> list = new List<string>(set);
+
+            list.Sort();
+
+            ans = new StringBuilder(list[list.Count - 1]);
+            if (ans.Length <= 0) return ans.ToString();
+            return ans.ToString().Substring(0, ans.Length - 1);
         }
     }
 
@@ -360,6 +419,7 @@ namespace Practice
             //Console.WriteLine(largestSubsequence.getLargest("a"));
             //Console.WriteLine(largestSubsequence.getLargest("example"));
             //Console.WriteLine(largestSubsequence.getLargest("aquickbrownfoxjumpsoverthelazydog"));
+            //Console.WriteLine(largestSubsequence.getLargest("gfdcbazyx"));
 
             #endregion
 
@@ -373,10 +433,14 @@ namespace Practice
 
             #endregion
 
-            #region DukeOnChessBoard
+            #region 9. DukeOnChessBoard
 
-
-
+            DukeOnChessBoard dukeOnChessBoard = new DukeOnChessBoard();
+            //Console.WriteLine(dukeOnChessBoard.dukePath(3, "b2"));
+            //Console.WriteLine(dukeOnChessBoard.dukePath(4, "d4"));
+            //Console.WriteLine(dukeOnChessBoard.dukePath(3, "a2"));
+            //Console.WriteLine(dukeOnChessBoard.dukePath(4, "d3"));
+            //Console.WriteLine(dukeOnChessBoard.dukePath(8, "a8"));
             #endregion
 
 
