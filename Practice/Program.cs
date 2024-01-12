@@ -333,8 +333,14 @@ namespace Practice
             list.Sort();
 
             ans = new StringBuilder(list[list.Count - 1]);
-            if (ans.Length <= 0) return ans.ToString();
-            return ans.ToString().Substring(0, ans.Length - 1);
+            if (ans.Length == 0) return ans.ToString();
+
+            string tempStr = new string(ans.ToString().Substring(0, ans.Length - 1));
+
+            if(tempStr.Length > 40) {
+                ans = new StringBuilder(tempStr.ToString().Substring(0,20) + "..."+tempStr.ToString().Substring(tempStr.Length-20));
+            }
+            return ans.ToString();
         }
     }
 
@@ -429,6 +435,49 @@ namespace Practice
 
     #endregion
 
+    #region 12. MysticAndCandiesEasy
+    class MysticAndCandiesEasy
+    {
+        public int minBoxes(int C, int X, int[] high)
+        {
+            int ans = 0;
+            Array.Sort(high);
+            List<int> list = new List<int>();
+            int n = high.Length;
+            int sum = 0;
+            for(  int i = 0; i < n; i++)
+            {
+                if((sum + high[i]) >= C)
+                {
+                    list.Add(C - sum);
+                    sum += C - sum;
+                }
+                else
+                {
+                    sum += high[i];
+                    list.Add(high[i]);
+                }
+                ans++;
+                if (sum == C) break;
+            }
+            for(int i = ans; i < n; ++i)
+            {
+                list.Add(0);
+            }
+            ans = 0;
+            sum = 0;
+            for(int i = list.Count-1; i>= 0; i--)
+            {
+                sum += list[i];
+                ans++;
+                if (sum >= X) break;
+            }
+
+            return ans;
+        }
+    }
+    #endregion
+
     #region 13. PrintScheduler
 
     class PrintScheduler
@@ -462,6 +511,21 @@ namespace Practice
     }
 
     #endregion
+
+    #region 14. TurningLightOn
+
+    class TurningLightOn
+    {
+        public int minFlips(String[] board)
+        {
+            int ans = 0;
+
+            return ans;
+        }
+    }
+
+    #endregion
+
 
     internal class Program
     {
@@ -581,12 +645,82 @@ namespace Practice
             //Console.WriteLine(mailbox.impossible("ABCDAAST", ["111 A ST", "A BAD ST", "B BAD ST"]));
             #endregion
 
+            #region 12. MysticAndCandiesEasy 
+
+            MysticAndCandiesEasy mysticAndCandiesEasy = new MysticAndCandiesEasy();
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(10, 10, [20]));
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(10, 7, [3, 3, 3, 3, 3]));
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(100, 63, [12, 34, 23, 45, 34]));
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(19, 12, [12, 9, 15, 1, 6, 4, 9, 10, 10, 10, 14, 14, 1, 1, 12, 10, 9, 2, 3, 6, 1, 7, 3, 4, 10, 3, 14]));
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(326, 109, [9,
+            //    13,
+            //    6,
+            //    6,
+            //    6,
+            //    16,
+            //    16,
+            //    16,
+            //    10,
+            //    16,
+            //    4,
+            //    3,
+            //    10,
+            //    8,
+            //    11,
+            //    17,
+            //    12,
+            //    5,
+            //    7,
+            //    8,
+            //    7,
+            //    4,
+            //    15,
+            //    7,
+            //    14,
+            //    2,
+            //    2,
+            //    1,
+            //    17,
+            //    1,
+            //    7,
+            //    7,
+            //    12,
+            //    17,
+            //    2,
+            //    9,
+            //    7,
+            //    1,
+            //    8,
+            //    16,
+            //    7,
+            //    4,
+            //    16,
+            //    2,
+            //    13,
+            //    3,
+            //    13,
+            //    1,
+            //    17,
+            //    6]));
+
+            #endregion
+
             #region 13. PrintScheduler
 
             PrintScheduler printScheduler = new PrintScheduler();
             //Console.WriteLine(printScheduler.getOutput(["AB", "CD"], ["0 1", "1 1", "0 1", "1 2"]));
             //Console.WriteLine(printScheduler.getOutput(["ABCDE"], ["0 20", "0 21"]));
             //Console.WriteLine(printScheduler.getOutput(["A", "B"], ["1 10", "0 1", "1 10", "0 2"]));
+
+            #endregion
+
+            #region 14. TurningLightOn
+
+            TurningLightOn turningLightOn = new TurningLightOn();
+            Console.WriteLine(turningLightOn.minFlips(["0001111","0001111","1111111"]));
+            Console.WriteLine(turningLightOn.minFlips(["1111111","1111111","1111111"]));
+            Console.WriteLine(turningLightOn.minFlips(["01001"]));
+            Console.WriteLine(turningLightOn.minFlips(["0101","1010","0101","1010"]));
 
             #endregion
 
