@@ -340,6 +340,129 @@ namespace Practice
 
     #endregion
 
+    #region 10. Islands
+
+    class Islands
+    {
+        public int beachLength(string[] kingdom)
+        {
+            Queue<char> queue = new Queue<char>();
+            int count = 0;
+            int n = kingdom.Length;
+            int m = kingdom[0].Length;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    int c = 0;
+                    if (kingdom[i][j] == '#' && (i&1)==1)
+                    {
+                        if (i - 1 >= 0 && kingdom[i - 1][j] == '.') c++;
+                        if (i - 1 >= 0 && j+1 < m && kingdom[i - 1][j+1] == '.') c++;
+                        if (j - 1 >= 0 && kingdom[i][j - 1] == '.') c++;
+                        if (j + 1 < m && kingdom[i][j + 1] == '.') c++;
+                        if (i + 1 < n && j < m && kingdom[i + 1][j] == '.') c++;
+                        if (i + 1 < n && j + 1 < m && kingdom[i + 1][j + 1] == '.') c++;
+                        count += c;
+                    }
+                    else if (kingdom[i][j] == '#')
+                    {
+                        if (i - 1 >= 0 && j - 1 >= 0 && kingdom[i - 1][j - 1] == '.') c++;
+                        if (i - 1 >= 0 && kingdom[i - 1][j] == '.') c++;
+                        if (j - 1 >= 0 && kingdom[i][j - 1] == '.') c++;
+                        if (j + 1 < m && kingdom[i][j + 1] == '.') c++;
+                        if (i + 1 < n && j - 1 >= 0 && kingdom[i + 1][j - 1] == '.') c++;
+                        if (i + 1 < n && j < m && kingdom[i + 1][j] == '.') c++;
+                        count += c;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+    }
+
+    #endregion
+
+    #region 11. Mailbox
+
+    class Mailbox
+    {
+        public int impossible(string collection, string[] address)
+        {
+            Dictionary<char, int> map = new Dictionary<char, int>();
+            foreach (char c in collection)
+            {
+                if (!map.ContainsKey(c))
+                {
+                    map[c] = 1;
+                }
+                else map[c] = map[c] + 1;
+            }
+            int count = 0;
+            foreach (string s in address)
+            {
+                Dictionary<char, int> mapForS = new Dictionary<char, int>();
+                foreach (char c in s)
+                {
+                    if (!mapForS.ContainsKey(c))
+                    {
+                        mapForS[c] = 1;
+                    }
+                    else mapForS[c] = mapForS[c] + 1;
+                }
+                foreach (char key in mapForS.Keys)
+                {
+                    if (key == ' ') continue;
+                    if (!map.ContainsKey(key) || map[key] < mapForS[key])
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            return count;
+        }
+
+    }
+
+    #endregion
+
+    #region 13. PrintScheduler
+
+    class PrintScheduler
+    {
+        public string getOutput(string[] threads, string[] slices)
+        {
+            Dictionary<int, int> map = new Dictionary<int, int>();
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                map.Add(i, 0);
+            }
+            StringBuilder ans = new StringBuilder();
+            for (int i = 0; i < slices.Length; i++)
+            {
+                string cur = slices[i];
+                int indexOfThread = Convert.ToInt32(cur.Split(" ")[0]);
+                int positionInThread = Convert.ToInt32(cur.Split(" ")[1]);
+                int prevIndexInThread = map[indexOfThread];
+                while (positionInThread-- > 0)
+                {
+                    ans.Append(threads[indexOfThread][prevIndexInThread]);
+                    prevIndexInThread++;
+                    prevIndexInThread %= threads[indexOfThread].Length;
+                }
+                map[indexOfThread] = prevIndexInThread;
+
+            }
+            return ans.ToString();
+        }
+    }
+
+    #endregion
+
     internal class Program
     {
         static void Main(string[] args)
@@ -441,6 +564,30 @@ namespace Practice
             //Console.WriteLine(dukeOnChessBoard.dukePath(3, "a2"));
             //Console.WriteLine(dukeOnChessBoard.dukePath(4, "d3"));
             //Console.WriteLine(dukeOnChessBoard.dukePath(8, "a8"));
+            #endregion
+
+            #region 10. Islands
+            Islands islands = new Islands();
+            //Console.WriteLine(islands.beachLength([".#...#.."]));
+            //Console.WriteLine(islands.beachLength(["..#.##", ".##.#.", "#.#..."]));
+            //Console.WriteLine(islands.beachLength(["#...#.....", "##..#...#."]));
+            //Console.WriteLine(islands.beachLength(["....#.", ".#....", "..#..#", "####.."]));
+            #endregion
+
+            #region 11. Mailbox
+            Mailbox mailbox = new Mailbox();
+            //Console.WriteLine(mailbox.impossible("AAAAAAABBCCCCCDDDEEE123456789", ["123C", "123A", "123 ADA"]));
+            //Console.WriteLine(mailbox.impossible("ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890", ["2 FIRST ST", " 31 QUINCE ST", "606 BAKER"]));
+            //Console.WriteLine(mailbox.impossible("ABCDAAST", ["111 A ST", "A BAD ST", "B BAD ST"]));
+            #endregion
+
+            #region 13. PrintScheduler
+
+            PrintScheduler printScheduler = new PrintScheduler();
+            //Console.WriteLine(printScheduler.getOutput(["AB", "CD"], ["0 1", "1 1", "0 1", "1 2"]));
+            //Console.WriteLine(printScheduler.getOutput(["ABCDE"], ["0 20", "0 21"]));
+            //Console.WriteLine(printScheduler.getOutput(["A", "B"], ["1 10", "0 1", "1 10", "0 2"]));
+
             #endregion
 
 
