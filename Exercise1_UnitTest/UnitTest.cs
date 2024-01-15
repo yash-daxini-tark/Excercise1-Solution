@@ -1,8 +1,8 @@
 using Practice;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Exercise1_UnitTest
 {
+    #region 1. HuffmanDecodingUnitTest
     [TestClass]
     public class HuffmanDecodingUnitTest
     {
@@ -15,9 +15,11 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(huffmanDecoding.decode("0001001100100111001", ["1", "0"]), "BBBABBAABBABBAAABBA");
             Assert.AreEqual(huffmanDecoding.decode("111011011000100110", ["010", "00", "0110", "0111", "11", "100", "101"]), "EGGFAC");
             Assert.AreEqual(huffmanDecoding.decode("001101100101100110111101011001011001010", ["110", "011", "10", "0011", "00011", "111", "00010", "0010", "010", "0000"]), "DBHABBACAIAIC");
-
         }
     }
+    #endregion
+
+    #region 2. LexmaxReplaceUnitTest
     [TestClass]
     public class LexmaxReplaceUnitTest
     {
@@ -32,6 +34,10 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(lexmaxReplace.get("xldyzmsrrwzwaofkcxwehgvtrsximxgdqrhjthkgfucrjdvwlr", "xfpidmmilhdfzypbguentqcojivertdhshstkcysydgcwuwhlk"), "zyyyzyxwwwzwvuuttxwtssvtssxrqxppqrontmmllukrkjvwlr");
         }
     }
+    #endregion
+
+    #region 3. SortingSubsetsUnitTest
+
     [TestClass]
     public class SortingSubsetsUnitTest
     {
@@ -45,6 +51,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(sortingSubsets.getMinimalSize([11, 11, 49, 7, 11, 11, 7, 7, 11, 49, 11]), 7);
         }
     }
+    #endregion
+
+    #region 4. PalindromeDecodingUnitTest
     [TestClass]
     public class PalindromeDecodingUnitTest
     {
@@ -59,6 +68,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(palindromeDecoding.decode("nodecoding", [], []), "nodecoding");
         }
     }
+    #endregion
+
+    #region 5. MovingAvgUnitTest
     [TestClass]
     public class MovingAvgUnitTest
     {
@@ -71,6 +83,10 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(movingAvg.difference(3, [6, 2.5, 3.5]), 0.0);
         }
     }
+    #endregion
+
+    #region 6. WordCompositionGameUnitTest
+
     [TestClass]
     public class WordCompositionGameUnitTest
     {
@@ -85,6 +101,9 @@ namespace Exercise1_UnitTest
                 ["dcaab", "aadbe", "bbaaa", "ebeec", "eaecb", "bcbba", "aecae", "adcab", "bcbda"]), "14/14/21");
         }
     }
+    #endregion
+
+    #region 7. LargestSubsequenceUnitTest
     [TestClass]
     public class LargestSubsequenceUnitTest
     {
@@ -98,6 +117,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(largestSubsequence.getLargest("aquickbrownfoxjumpsoverthelazydog"), "zyog");
         }
     }
+    #endregion
+
+    #region 8. MaximumBalancesUnitTest
     [TestClass]
     public class MaximumBalancesUnitTest
     {
@@ -111,6 +133,10 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(maximumBalances.solve("))()()))(()"), 10);
         }
     }
+    #endregion
+
+    #region 9. DukeOnChessBoardUnitTest
+
     [TestClass]
     public class DukeOnChessBoardUnitTest
     {
@@ -125,6 +151,10 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(dukeOnChessBoard.dukePath(8, "a8"), "a8-b8-c8-d8-e8-f8-g8...a1-a2-a3-a4-a5-a6-a7");
         }
     }
+    #endregion
+
+    #region 10. IslandsUnitTest
+
     [TestClass]
     public class IslandsUnitTest
     {
@@ -138,6 +168,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(islands.beachLength(["....#.", ".#....", "..#..#", "####.."]), 24);
         }
     }
+    #endregion
+
+    #region 11. MailboxUnitTest
     [TestClass]
     public class MailboxUnitTest
     {
@@ -150,6 +183,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(mailbox.impossible("ABCDAAST", ["111 A ST", "A BAD ST", "B BAD ST"]), 2);
         }
     }
+    #endregion
+
+    #region 12. MysticAndCandiesEasyUnitTest
     [TestClass]
     public class MysticAndCandiesEasyUnitTest
     {
@@ -161,10 +197,61 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(mysticAndCandiesEasy.minBoxes(10, 7, [3, 3, 3, 3, 3]), 4);
             Assert.AreEqual(mysticAndCandiesEasy.minBoxes(100, 63, [12, 34, 23, 45, 34]), 3);
             Assert.AreEqual(mysticAndCandiesEasy.minBoxes(19, 12, [12, 9, 15, 1, 6, 4, 9, 10, 10, 10, 14, 14, 1, 1, 12, 10, 9, 2, 3, 6, 1, 7, 3, 4, 10, 3, 14]), 22);
-            Assert.AreEqual(mysticAndCandiesEasy.minBoxes(326, 109, [9,13,6,6,6,16,16,16,10,16,4,3,10,8,11,17,12,5,7,8,7,4,15,7,14,2,2,1,17,1,7,7,12,17,2,9,7,1,8,16,7,4,
-                16,2,13,3,13,1,17,6]), 15);
+            Assert.AreEqual(mysticAndCandiesEasy.minBoxes(326, 109, [9,
+                13,
+                6,
+                6,
+                6,
+                16,
+                16,
+                16,
+                10,
+                16,
+                4,
+                3,
+                10,
+                8,
+                11,
+                17,
+                12,
+                5,
+                7,
+                8,
+                7,
+                4,
+                15,
+                7,
+                14,
+                2,
+                2,
+                1,
+                17,
+                1,
+                7,
+                7,
+                12,
+                17,
+                2,
+                9,
+                7,
+                1,
+                8,
+                16,
+                7,
+                4,
+                16,
+                2,
+                13,
+                3,
+                13,
+                1,
+                17,
+                6]), 15);
         }
     }
+    #endregion
+
+    #region 13. PrintSchedulerUnitTest
     [TestClass]
     public class PrintSchedulerUnitTest
     {
@@ -178,6 +265,9 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(printScheduler.getOutput(["A"], ["0 1"]), "A");
         }
     }
+    #endregion
+
+    #region 14. TurningLightOnUnitTest
     [TestClass]
     public class TurningLightOnUnitTest
     {
@@ -191,4 +281,5 @@ namespace Exercise1_UnitTest
             Assert.AreEqual(turningLightOn.minFlips(["0101", "1010", "0101", "1010"]), 7);
         }
     }
+    #endregion
 }
