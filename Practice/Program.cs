@@ -337,8 +337,9 @@ namespace Practice
 
             string tempStr = new string(ans.ToString().Substring(0, ans.Length - 1));
 
-            if(tempStr.Length > 40) {
-                ans = new StringBuilder(tempStr.ToString().Substring(0,20) + "..."+tempStr.ToString().Substring(tempStr.Length-20));
+            if (tempStr.Length > 40)
+            {
+                ans = new StringBuilder(tempStr.ToString().Substring(0, 20) + "..." + tempStr.ToString().Substring(tempStr.Length - 20));
             }
             return ans.ToString();
         }
@@ -361,10 +362,10 @@ namespace Practice
                 for (int j = 0; j < m; j++)
                 {
                     int c = 0;
-                    if (kingdom[i][j] == '#' && (i&1)==1)
+                    if (kingdom[i][j] == '#' && (i & 1) == 1)
                     {
                         if (i - 1 >= 0 && kingdom[i - 1][j] == '.') c++;
-                        if (i - 1 >= 0 && j+1 < m && kingdom[i - 1][j+1] == '.') c++;
+                        if (i - 1 >= 0 && j + 1 < m && kingdom[i - 1][j + 1] == '.') c++;
                         if (j - 1 >= 0 && kingdom[i][j - 1] == '.') c++;
                         if (j + 1 < m && kingdom[i][j + 1] == '.') c++;
                         if (i + 1 < n && j < m && kingdom[i + 1][j] == '.') c++;
@@ -445,9 +446,9 @@ namespace Practice
             List<int> list = new List<int>();
             int n = high.Length;
             int sum = 0;
-            for(  int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
-                if((sum + high[i]) >= C)
+                if ((sum + high[i]) >= C)
                 {
                     list.Add(C - sum);
                     sum += C - sum;
@@ -460,13 +461,13 @@ namespace Practice
                 ans++;
                 if (sum == C) break;
             }
-            for(int i = ans; i < n; ++i)
+            for (int i = ans; i < n; ++i)
             {
                 list.Add(0);
             }
             ans = 0;
             sum = 0;
-            for(int i = list.Count-1; i>= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
                 sum += list[i];
                 ans++;
@@ -516,11 +517,46 @@ namespace Practice
 
     class TurningLightOn
     {
-        public int minFlips(String[] board)
+        public int minFlips(string[] board)
         {
-            int ans = 0;
+            int m = board.Length;
+            int n = board[0].Length;
+            int[] operations = new int[n];
+            bool isZero = true;
+            for (int i = m - 1; i >= 0; i--)
+            {
+                int curOperations = 0;
+                bool[] curStringBits = new bool[n];
+                for (int j = 0; j < n; j++)
+                {
+                    curStringBits[j] = board[i][j] == '1' ? true : false;
+                }
+                for (int j = 0; j < n; j++)
+                {
+                    curStringBits[j] = ((operations[j] & 1) == 0 ? curStringBits[j] : !curStringBits[j]);
+                }
+                isZero = true;
+                for (int j = n - 1; j >= 0; j--)
+                {
+                    if (isZero && !curStringBits[j])
+                    {
+                        curOperations++;
+                    }
+                    else if (!isZero && curStringBits[j])
+                    {
+                        curOperations++;
+                    }
+                    else
+                    {
+                        operations[j] += curOperations;
+                        continue;
+                    }
+                    isZero = !isZero;
+                    operations[j] += curOperations;
+                }
+            }
 
-            return ans;
+            return operations[0];
         }
     }
 
@@ -651,6 +687,7 @@ namespace Practice
             //Console.WriteLine(mysticAndCandiesEasy.minBoxes(10, 10, [20]));
             //Console.WriteLine(mysticAndCandiesEasy.minBoxes(10, 7, [3, 3, 3, 3, 3]));
             //Console.WriteLine(mysticAndCandiesEasy.minBoxes(100, 63, [12, 34, 23, 45, 34]));
+            //Console.WriteLine(mysticAndCandiesEasy.minBoxes(100, 1, [12, 34, 23, 45, 34]));
             //Console.WriteLine(mysticAndCandiesEasy.minBoxes(19, 12, [12, 9, 15, 1, 6, 4, 9, 10, 10, 10, 14, 14, 1, 1, 12, 10, 9, 2, 3, 6, 1, 7, 3, 4, 10, 3, 14]));
             //Console.WriteLine(mysticAndCandiesEasy.minBoxes(326, 109, [9,
             //    13,
@@ -717,14 +754,11 @@ namespace Practice
             #region 14. TurningLightOn
 
             TurningLightOn turningLightOn = new TurningLightOn();
-            Console.WriteLine(turningLightOn.minFlips(["0001111","0001111","1111111"]));
-            Console.WriteLine(turningLightOn.minFlips(["1111111","1111111","1111111"]));
+            Console.WriteLine(turningLightOn.minFlips(["0001111", "0001111", "1111111"]));
+            Console.WriteLine(turningLightOn.minFlips(["1111111", "1111111", "1111111"]));
             Console.WriteLine(turningLightOn.minFlips(["01001"]));
-            Console.WriteLine(turningLightOn.minFlips(["0101","1010","0101","1010"]));
-
+            Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0101", "1010"]));
             #endregion
-
-
 
         }
     }
