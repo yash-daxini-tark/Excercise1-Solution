@@ -6,7 +6,7 @@ using System.Text;
 namespace Practice
 {
     #region 1. HuffmanDecoding
-    class HuffmanDecoding
+    public class HuffmanDecoding
     {
         public String decode(string archive, string[] dictionary)
         {
@@ -36,7 +36,7 @@ namespace Practice
     #endregion
 
     #region 2. LexmaxReplace
-    class LexmaxReplace
+    public class LexmaxReplace
     {
         public string get(string s, string t)
         {
@@ -66,7 +66,7 @@ namespace Practice
     #endregion
 
     #region 3. SortingSubsets
-    class SortingSubsets
+    public class SortingSubsets
     {
         public int getMinimalSize(int[] a)
         {
@@ -88,7 +88,7 @@ namespace Practice
 
     #region 4. PalindromeDecoding
 
-    class PalindromeDecoding
+    public class PalindromeDecoding
     {
         public string decode(string code, int[] position, int[] length)
         {
@@ -109,7 +109,7 @@ namespace Practice
 
     #region 5. MovingAvg
 
-    class MovingAvg
+    public class MovingAvg
     {
         public double difference(int k, double[] data)
         {
@@ -132,7 +132,7 @@ namespace Practice
     #endregion
 
     #region 6. WordCompositionGame
-    class WordCompositionGame
+    public class WordCompositionGame
     {
         public string score(string[] listA, string[] listB, string[] listC)
         {
@@ -225,7 +225,7 @@ namespace Practice
 
     #region 7. LargestSubsequence
 
-    class LargestSubsequence
+    public class LargestSubsequence
     {
         public void doRecursion(string s, int i, HashSet<string> set, StringBuilder cur)
         {
@@ -269,7 +269,7 @@ namespace Practice
 
     #region 8. MaximumBalances
 
-    class MaximumBalances
+    public class MaximumBalances
     {
         public int solve(string s)
         {
@@ -288,7 +288,7 @@ namespace Practice
 
     #region 9. DukeOnChessBoard
 
-    class DukeOnChessBoard
+    public class DukeOnChessBoard
     {
         static StringBuilder ans;
         public void doRecursion(int i, int j, int n, HashSet<string> set, Dictionary<int, char> map, bool[,] visited, string cur)
@@ -341,6 +341,7 @@ namespace Practice
             {
                 ans = new StringBuilder(tempStr.ToString().Substring(0, 20) + "..." + tempStr.ToString().Substring(tempStr.Length - 20));
             }
+            else ans = new StringBuilder(tempStr);
             return ans.ToString();
         }
     }
@@ -349,7 +350,7 @@ namespace Practice
 
     #region 10. Islands
 
-    class Islands
+    public class Islands
     {
         public int beachLength(string[] kingdom)
         {
@@ -394,7 +395,7 @@ namespace Practice
 
     #region 11. Mailbox
 
-    class Mailbox
+    public class Mailbox
     {
         public int impossible(string collection, string[] address)
         {
@@ -437,7 +438,7 @@ namespace Practice
     #endregion
 
     #region 12. MysticAndCandiesEasy
-    class MysticAndCandiesEasy
+    public class MysticAndCandiesEasy
     {
         public int minBoxes(int C, int X, int[] high)
         {
@@ -481,7 +482,7 @@ namespace Practice
 
     #region 13. PrintScheduler
 
-    class PrintScheduler
+    public class PrintScheduler
     {
         public string getOutput(string[] threads, string[] slices)
         {
@@ -515,7 +516,7 @@ namespace Practice
 
     #region 14. TurningLightOn
 
-    class TurningLightOn
+    public class TurningLightOn
     {
         public int minFlips(string[] board)
         {
@@ -579,11 +580,11 @@ namespace Practice
 
             #region 2. LexmaxReplace
             LexmaxReplace lexmaxReplace = new LexmaxReplace();
-            //ans = lexmaxReplace.get("abb", "c");
-            //ans = lexmaxReplace.get("z", "f");
-            //ans = lexmaxReplace.get("fedcba", "ee");
-            //ans = lexmaxReplace.get("top", "coder");
-            //ans = lexmaxReplace.get("xldyzmsrrwzwaofkcxwehgvtrsximxgdqrhjthkgfucrjdvwlr", "xfpidmmilhdfzypbguentqcojivertdhshstkcysydgcwuwhlk");
+                //ans = lexmaxReplace.get("abb", "c");
+                //ans = lexmaxReplace.get("z", "f");
+                //ans = lexmaxReplace.get("fedcba", "ee");
+                //ans = lexmaxReplace.get("top", "coder");
+                //ans = lexmaxReplace.get("xldyzmsrrwzwaofkcxwehgvtrsximxgdqrhjthkgfucrjdvwlr", "xfpidmmilhdfzypbguentqcojivertdhshstkcysydgcwuwhlk");
             //Console.WriteLine(ans);
             #endregion
 
@@ -659,11 +660,11 @@ namespace Practice
             #region 9. DukeOnChessBoard
 
             DukeOnChessBoard dukeOnChessBoard = new DukeOnChessBoard();
-            //Console.WriteLine(dukeOnChessBoard.dukePath(3, "b2"));
-            //Console.WriteLine(dukeOnChessBoard.dukePath(4, "d4"));
-            //Console.WriteLine(dukeOnChessBoard.dukePath(3, "a2"));
-            //Console.WriteLine(dukeOnChessBoard.dukePath(4, "d3"));
-            //Console.WriteLine(dukeOnChessBoard.dukePath(8, "a8"));
+            Console.WriteLine(dukeOnChessBoard.dukePath(3, "b2"));
+            Console.WriteLine(dukeOnChessBoard.dukePath(4, "d4"));
+            Console.WriteLine(dukeOnChessBoard.dukePath(3, "a2"));
+            Console.WriteLine(dukeOnChessBoard.dukePath(4, "d3"));
+            Console.WriteLine(dukeOnChessBoard.dukePath(8, "a8"));
             #endregion
 
             #region 10. Islands
@@ -754,10 +755,14 @@ namespace Practice
             #region 14. TurningLightOn
 
             TurningLightOn turningLightOn = new TurningLightOn();
-            Console.WriteLine(turningLightOn.minFlips(["0001111", "0001111", "1111111"]));
-            Console.WriteLine(turningLightOn.minFlips(["1111111", "1111111", "1111111"]));
-            Console.WriteLine(turningLightOn.minFlips(["01001"]));
-            Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0101", "1010"]));
+            //Console.WriteLine(turningLightOn.minFlips(["0001111", "0001111", "1111111"]));
+            //Console.WriteLine(turningLightOn.minFlips(["1111111", "1111111", "1111111"]));
+            //Console.WriteLine(turningLightOn.minFlips(["01001"]));
+            //Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0101", "1010"]));
+            //Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0100", "1111"]));
+            //Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0100", "1111"]));
+            //Console.WriteLine(turningLightOn.minFlips(["0101", "1010", "0101", "1011"]));
+
             #endregion
 
         }
